@@ -1,22 +1,20 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
+const port = process.env.PORT || 3000;
+
+
 app.use(cors());
 app.use(express.json());
 
-// GET /api/hello
-app.get("/api/hello", (req: Request, res: Response) => {
-  res.json({ message: "Olá, mundo!" });
+app.get("/", (req: Request, res: Response) => {
+  res.send("API Event Manager Online")
 });
 
-// POST /api/echo
-app.post("/api/echo", (req: Request, res: Response) => {
-  const { nome } = req.body;
-  res.json({ resposta: `Você enviou: ${nome}` });
-});
-
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor rodando em http://localhost:${PORT}`);
-});
+app.listen(port,() =>{
+  console.log(`Servidor rodando na porta ${port}`);
+})
